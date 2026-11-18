@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đố Bạn Biết Ngày Mai 19/11 Là Ngày Gì? 🤔</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts hỗ trợ tiếng Việt hiện đại -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 50%, #fce7f3 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, .font-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Hiệu ứng rung lắc mạnh cho đáp án A */
+        @keyframes shakeHard {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            15% { transform: translateX(-11px) rotate(-2.5deg); }
+            30% { transform: translateX(11px) rotate(2.5deg); }
+            45% { transform: translateX(-9px) rotate(-2deg); }
+            60% { transform: translateX(9px) rotate(2deg); }
+            75% { transform: translateX(-5px) rotate(-1deg); }
+            90% { transform: translateX(5px) rotate(1deg); }
+        }
+
+        .animate-shake-hard {
+            animation: shakeHard 0.55s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        /* Hiệu ứng nhún nhảy / xoáy nước cho đáp án B (Bồn cầu) */
+        @keyframes flushBounce {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(0.92, 1.08) rotate(-3deg); }
+            50% { transform: scale(1.06, 0.92) rotate(3deg); }
+            75% { transform: scale(0.96, 1.03) rotate(-1.5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .animate-flush-bounce {
+            animation: flushBounce 0.6s ease-in-out;
+        }
+
+        /* Hiệu ứng xoay vòng vui nhộn cho đáp án D */
+        @keyframes spinWobble {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-5deg) scale(0.96); }
+            50% { transform: rotate(5deg) scale(1.03); }
+            75% { transform: rotate(-3deg) scale(0.98); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .animate-spin-wobble {
+            animation: spinWobble 0.55s ease-in-out;
+        }
+
+        /* Hiệu ứng nảy tưng tưng cho ô đáp án đúng C */
+        @keyframes tadaWin {
+            0% { transform: scale(1); }
+            15%, 25% { transform: scale(0.95) rotate(-2deg); }
+            35%, 55%, 75% { transform: scale(1.04) rotate(2deg); }
+            45%, 65% { transform: scale(1.04) rotate(-2deg); }
+            100% { transform: scale(1.02) rotate(0deg); }
+        }
+
+        .animate-tada {
+            animation: tadaWin 0.8s ease-in-out forwards;
+        }
+
+        /* Hiệu ứng nổi bồng bềnh cho icon tờ lịch */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Hiệu ứng xuất hiện mượt mà */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.88) translateY(8px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-pop-in {
+            animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Hiệu ứng tia laser quét Face ID lên xuống */
+        @keyframes scanLaser {
+            0% { top: 8%; opacity: 0.45; }
+            50% { top: 88%; opacity: 1; }
+            100% { top: 8%; opacity: 0.45; }
+        }
+
+        .animate-laser {
+            animation: scanLaser 1.25s ease-in-out infinite;
+        }
+
+        /* Hiệu ứng chữ 7 sắc cầu vồng chuyển động mượt mà cho chữ ký tác giả */
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .rainbow-author {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #eab308, #00c853, #0091ea, #4b0082, #9400d3, #ff0000);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowFlow 4s linear infinite;
+        }
+
+        /* Ẩn thanh cuộn phụ trên thanh thời gian thực nếu màn hình siêu nhỏ */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-between min-h-screen select-none">
+
+    <!-- Canvas pháo giấy tự viết phủ toàn màn hình -->
+    <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[60] w-full h-full"></canvas>
+
+    <!-- 1. THANH THỜI GIAN THỰC GỘP GỌN 1 HÀNG DUY NHẤT Ở TRÊN CÙNG -->
+    <header class="w-full sticky top-0 z-40 bg-white/90 backdrop-blur-lg border-b border-white/80 shadow-sm px-2 sm:px-5 py-2">
+        <div class="max-w-4xl mx-auto flex flex-row flex-nowrap items-center justify-between gap-1.5 sm:gap-3 whitespace-nowrap overflow-x-auto no-scrollbar text-[11px] sm:text-xs md:text-sm">
+            
+            <!-- Lời chào tự động theo giờ thực tế -->
+            <div class="inline-flex items-center bg-amber-100/90 border border-amber-200/90 px-2 sm:px-3 py-1 rounded-full shrink-0">
+                <span id="greetingText" class="font-extrabold text-slate-800">
+                    Chào buổi sáng ⛅️
+                </span>
+            </div>
+
+            <!-- Đồng hồ & ngày tháng thực tế hiện tại (11:20:05 - 18/11) -->
+            <div class="inline-flex items-center gap-1 bg-slate-100/90 border border-slate-200/80 px-2 sm:px-3 py-1 rounded-full font-bold text-slate-700 tabular-nums shrink-0">
+                <span class="text-indigo-500">🕒</span>
+                <span id="liveClockDate">11:20:00 - 18/11</span>
+            </div>
+
+            <!-- Bộ đếm ngược thời gian thực tới 00:00:00 ngày 19/11 -->
+            <div class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-rose-500 text-white px-2.5 sm:px-3 py-1 rounded-full font-extrabold tabular-nums shadow-xs shrink-0">
+                <span id="countdownText">Còn 12g 39p 59s tới 19/11</span>
+            </div>
+
+            <!-- Nút Bật/Tắt Âm Thanh nhỏ gọn -->
+            <button id="soundToggle" onclick="toggleSound()" 
+                class="inline-flex items-center justify-center bg-slate-100 hover:bg-slate-200/80 text-slate-700 w-7 h-7 sm:w-auto sm:px-2.5 sm:py-1 rounded-full border border-slate-200 transition-all active:scale-90 shrink-0 font-bold"
+                title="Bật/Tắt âm thanh">
+                <span id="soundIcon">🔊</span>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- 2. NỘI DUNG CHÍNH & 4 ĐÁP ÁN VUI NHỘN -->
+    <div class="flex-1 w-full flex items-center justify-center px-3 py-4 sm:p-6">
+        <main class="w-full max-w-xl bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-white p-5 sm:p-8 relative overflow-hidden transition-all duration-500">
+            
+            <!-- Trang trí nền nhẹ nhàng -->
+            <div class="absolute -top-16 -left-16 w-40 h-40 bg-sky-300/30 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -right-16 w-44 h-44 bg-amber-300/30 rounded-full blur-2xl pointer-events-none"></div>
+
+            <!-- Phần Header: Tờ lịch & Câu hỏi -->
+            <div class="text-center relative z-10">
+                <!-- Huy hiệu tờ lịch 19/11 -->
+                <div class="inline-flex flex-col items-center bg-white rounded-2xl shadow-md border-2 border-rose-100 overflow-hidden mb-3.5 animate-float w-20 sm:w-24">
+                    <div class="bg-gradient-to-r from-rose-500 to-orange-500 text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider w-full py-1">
+                        Tháng 11
+                    </div>
+                    <div class="py-1.5 sm:py-2 px-4">
+                        <span class="text-2xl sm:text-3xl font-black text-slate-800 font-title">19</span>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <span class="inline-block bg-indigo-100 text-indigo-700 text-[11px] sm:text-xs font-extrabold px-3.5 py-1 rounded-full mb-2.5 tracking-wide">
+                        ✨ THỬ THÁCH TRÍ NHỚ ✨
+                    </span>
+                </div>
+
+                <h1 class="text-xl sm:text-3xl font-black text-slate-800 leading-snug mb-1.5">
+                    Đố bạn biết ngày mai <span class="text-rose-500 underline decoration-wavy decoration-amber-400">19/11</span> là ngày gì? 🤔
+                </h1>
+                <p class="text-slate-500 text-xs sm:text-base font-semibold mb-5">
+                    Chọn 1 đáp án chuẩn xác nhất bên dưới nhé, đừng để bị lừa! 👀
+                </p>
+            </div>
+
+            <!-- Khu vực hiển thị thông báo trêu chọc khi chọn SAI -->
+            <div id="teaseBox" class="hidden mb-4 p-3.5 sm:p-4 rounded-2xl bg-rose-50 border-2 border-rose-200 text-rose-800 text-center shadow-sm relative z-10">
+                <div class="flex items-center justify-center gap-1.5 mb-0.5">
+                    <span id="teaseEmoji" class="text-xl sm:text-2xl">😅</span>
+                    <span class="font-extrabold text-xs sm:text-sm uppercase tracking-wider text-rose-500">Ối dồi ôi, nhầm rồi!</span>
+                </div>
+                <p id="teaseMessage" class="font-bold text-sm sm:text-base leading-relaxed"></p>
+            </div>
+
+            <!-- Danh sách 4 ô đáp án -->
+            <div id="optionsContainer" class="grid grid-cols-1 gap-3 relative z-10">
+                
+                <!-- Đáp án A -->
+                <button id="btn-A" onclick="handleAnswer('A')" 
+                    class="option-btn group w-full text-left p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-indigo-50/70 border-2 border-slate-200 hover:border-indigo-400 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3.5 active:scale-[0.98]">
+                    <span class="badge w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-100 text-indigo-700 group-hover:bg-indigo-600 group-hover:text-white font-black text-base sm:text-lg flex items-center justify-center shrink-0 transition-colors">
+                        A
+                    </span>
+                    <span class="font-bold text-slate-700 text-sm sm:text-lg flex-1">
+                        Ngày Nhà Giáo Việt Nam 💐
+                    </span>
+                    <span class="status-icon text-lg sm:text-xl opacity-0 transition-opacity">❌</span>
+                </button>
+
+                <!-- Đáp án B -->
+                <button id="btn-B" onclick="handleAnswer('B')" 
+                    class="option-btn group w-full text-left p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-indigo-50/70 border-2 border-slate-200 hover:border-indigo-400 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3.5 active:scale-[0.98]">
+                    <span class="badge w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-amber-700 group-hover:bg-amber-500 group-hover:text-white font-black text-base sm:text-lg flex items-center justify-center shrink-0 transition-colors">
+                        B
+                    </span>
+                    <span class="font-bold text-slate-700 text-sm sm:text-lg flex-1">
+                        Ngày Quốc Tế Bồn Cầu 🚽
+                    </span>
+                    <span class="status-icon text-lg sm:text-xl opacity-0 transition-opacity">❌</span>
+                </button>
+
+                <!-- Đáp án C (ĐÁP ÁN ĐÚNG) -->
+                <button id="btn-C" onclick="handleAnswer('C')" 
+                    class="option-btn group w-full text-left p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-indigo-50/70 border-2 border-slate-200 hover:border-indigo-400 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3.5 active:scale-[0.98]">
+                    <span class="badge w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sky-100 text-sky-700 group-hover:bg-sky-600 group-hover:text-white font-black text-base sm:text-lg flex items-center justify-center shrink-0 transition-colors">
+                        C
+                    </span>
+                    <span class="font-bold text-slate-700 text-sm sm:text-lg flex-1">
+                        Ngày Quốc Tế Đàn Ông 👔
+                    </span>
+                    <span class="status-icon text-lg sm:text-xl opacity-0 transition-opacity">✅</span>
+                </button>
+
+                <!-- Đáp án D -->
+                <button id="btn-D" onclick="handleAnswer('D')" 
+                    class="option-btn group w-full text-left p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-indigo-50/70 border-2 border-slate-200 hover:border-indigo-400 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3.5 active:scale-[0.98]">
+                    <span class="badge w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-pink-100 text-pink-700 group-hover:bg-pink-500 group-hover:text-white font-black text-base sm:text-lg flex items-center justify-center shrink-0 transition-colors">
+                        D
+                    </span>
+                    <span class="font-bold text-slate-700 text-sm sm:text-lg flex-1">
+                        Ngày Quốc Tế Ngủ Nướng & Xinh Đẹp 😴
+                    </span>
+                    <span class="status-icon text-lg sm:text-xl opacity-0 transition-opacity">❌</span>
+                </button>
+
+            </div>
+
+            <!-- Khung chúc mừng / Thiệp nhắc khéo quà 19/11 sau khi quét Face ID xong -->
+            <div id="winCard" class="hidden mt-5 p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50 to-amber-50 border-2 border-emerald-400 shadow-xl text-center relative z-10 animate-pop-in">
+                <div class="inline-flex items-center gap-1.5 bg-pink-100 text-pink-700 text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+                    <span>✨ Đã xác minh người đẹp:</span>
+                    <span id="badgeBeautyScore" class="font-black">98/100đ</span>
+                </div>
+                <div class="text-4xl sm:text-5xl mb-2">🎉🤴🎁</div>
+                <h2 class="text-xl sm:text-2xl font-black text-emerald-700 mb-2">
+                    CHÍNH XÁC 100 ĐIỂM!
+                </h2>
+                <p class="text-slate-700 font-bold text-sm sm:text-base leading-relaxed mb-4">
+                    Mai là <span class="text-emerald-600 font-black">19/11 - Ngày Quốc Tế Đàn Ông</span> đó! 😎💪<br>
+                    Người vừa thông minh lại vừa xinh đẹp chuẩn gu thế này chắc chắn sẽ nhớ chuẩn bị quà, lời chúc ngọt ngào (hoặc <span class="bg-amber-200/80 px-2 py-0.5 rounded-lg text-amber-900">ting ting chuyển khoản 💸</span>) cho cánh mày râu tụi tui nha!
+                </p>
+                
+                <div class="flex flex-wrap items-center justify-center gap-2.5 mt-4">
+                    <button onclick="openFaceIdModal()" 
+                        class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm shadow-md transition-transform active:scale-95 flex items-center gap-1.5">
+                        <span>🤳</span> Quét lại Face ID
+                    </button>
+                    <button onclick="launchConfetti()" 
+                        class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-extrabold text-xs sm:text-sm shadow-md transition-transform active:scale-95 flex items-center gap-1.5">
+                        <span>🎊</span> Bắn pháo tiếp
+                    </button>
+                    <button onclick="resetGame()" 
+                        class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm shadow-md transition-transform active:scale-95 flex items-center gap-1.5">
+                        <span>🔄</span> Chơi lại
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gợi ý nhỏ bên trong thẻ -->
+            <div class="mt-5 text-center text-[11px] sm:text-xs text-slate-400 font-semibold relative z-10">
+                Gửi link này cho người ấy để nhắc nhẹ khéo léo nhé 😉
+            </div>
+        </main>
+    </div>
+
+    <!-- 3. CỬA SỔ NỔI (MODAL) QUÉT FACE ID AI ĐÁNH GIÁ ĐỘ ĐẸP GÁI -->
+    <div id="faceIdModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md transition-opacity">
+        <div class="w-full max-w-md bg-slate-900 border border-cyan-400/40 rounded-3xl shadow-[0_0_50px_rgba(34,211,238,0.25)] p-6 sm:p-7 text-white relative overflow-hidden animate-pop-in">
+            
+            <!-- Lưới công nghệ mờ nền -->
+            <div class="absolute inset-0 bg-[radial-gradient(#22d3ee_1px,transparent_1px)] [background-size:18px_18px] opacity-10 pointer-events-none"></div>
+
+            <!-- Header Modal -->
+            <div class="flex items-center justify-between mb-4 relative z-10">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-cyan-300">AI Beauty Scanner v4.0</span>
+                </div>
+                <button onclick="closeFaceIdModal()" class="text-slate-400 hover:text-white text-sm font-bold px-2 py-1 rounded-lg hover:bg-slate-800 transition-colors">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Khung quét khuôn mặt sinh trắc học -->
+            <div class="relative mx-auto w-52 h-52 sm:w-56 sm:h-56 rounded-3xl bg-slate-950/90 border-2 border-cyan-500/40 flex items-center justify-center overflow-hidden shadow-inner mb-5">
+                <!-- 4 góc khung ngắm Face ID -->
+                <div class="absolute top-3 left-3 w-7 h-7 border-t-4 border-l-4 border-cyan-400 rounded-tl-xl z-20"></div>
+                <div class="absolute top-3 right-3 w-7 h-7 border-t-4 border-r-4 border-cyan-400 rounded-tr-xl z-20"></div>
+                <div class="absolute bottom-3 left-3 w-7 h-7 border-b-4 border-l-4 border-cyan-400 rounded-bl-xl z-20"></div>
+                <div class="absolute bottom-3 right-3 w-7 h-7 border-b-4 border-r-4 border-cyan-400 rounded-br-xl z-20"></div>
+
+                <!-- Video camera thật (tùy chọn) -->
+                <video id="cameraFeed" autoplay playsinline muted class="hidden absolute inset-0 w-full h-full object-cover scale-x-[-1] opacity-85"></video>
+
+                <!-- Avatar / Khung quét AI mặc định -->
+                <div id="aiFaceGraphic" class="relative z-10 flex flex-col items-center justify-center transition-all duration-500">
+                    <svg class="w-28 h-28 text-cyan-400/90 drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M25 42 C25 22, 75 22, 75 42 C75 68, 62 82, 50 82 C38 82, 25 68, 25 42 Z" stroke-dasharray="4 3"/>
+                        <circle cx="39" cy="44" r="2.5" fill="currentColor"/>
+                        <circle cx="61" cy="44" r="2.5" fill="currentColor"/>
+                        <path d="M50 45 L48 56 L52 56"/>
+                        <path d="M41 64 Q50 71 59 64"/>
+                    </svg>
+                </div>
+
+                <!-- Tia laser quét lên xuống -->
+                <div id="laserBeam" class="absolute left-2 right-2 h-1 bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_15px_#22d3ee] z-20 animate-laser"></div>
+
+                <!-- Lớp phủ xác minh thành công -->
+                <div id="scanSuccessOverlay" class="hidden absolute inset-0 bg-emerald-500/20 backdrop-blur-[2px] flex flex-col items-center justify-center z-30 animate-pop-in">
+                    <div class="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl shadow-lg mb-1">
+                        ✓
+                    </div>
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-300">Face ID Verified</span>
+                </div>
+            </div>
+
+            <!-- Trạng thái đang quét -->
+            <div id="scanningState" class="text-center relative z-10">
+                <h3 class="text-lg sm:text-xl font-black text-cyan-300 mb-1.5">
+                    Đang quét Face ID AI...
+                </h3>
+                <p id="scanSubtext" class="text-slate-300 text-sm font-medium mb-4">
+                    Hệ thống AI đang phân tích thần thái & độ xinh đẹp...
+                </p>
+
+                <!-- Thanh tiến trình quét 2.5s -->
+                <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden mb-3 p-0.5 border border-slate-700">
+                    <div id="scanProgressBar" class="h-full bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 rounded-full transition-all duration-100" style="width: 0%"></div>
+                </div>
+
+                <!-- Nút tùy chọn bật camera thật -->
+                <button id="enableCamBtn" onclick="startRealCamera()" 
+                    class="text-xs text-cyan-400 hover:text-cyan-300 underline font-semibold transition-colors">
+                    📷 Bật camera thật để soi gương luôn (tùy chọn)
+                </button>
+            </div>
+
+            <!-- Kết quả sau khi quét xong (95 - 100 điểm) -->
+            <div id="scanResultState" class="hidden text-center relative z-10 animate-pop-in">
+                <div class="inline-block bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold px-3.5 py-1 rounded-full mb-2">
+                    ✅ XÁC MINH THÀNH CÔNG!
+                </div>
+                <h3 class="text-slate-200 text-sm sm:text-base font-bold">
+                    Chỉ số <span class="text-pink-400 font-extrabold">Độ Đẹp Gái</span> của bạn đạt:
+                </h3>
+                <div class="my-2 flex items-baseline justify-center gap-1">
+                    <span id="beautyScoreValue" class="text-5xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-pink-400 to-cyan-300 font-title">
+                        98
+                    </span>
+                    <span class="text-xl font-extrabold text-slate-300">/100 điểm</span>
+                </div>
+                <p id="beautyComment" class="text-amber-200 font-bold text-sm sm:text-base bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3 mb-5">
+                    "Xinh xuất sắc, chuẩn gu 19/11!" 💖✨
+                </p>
+
+                <button onclick="closeFaceIdModal()" 
+                    class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-base shadow-lg shadow-emerald-500/25 transition-transform active:scale-95 flex items-center justify-center gap-2">
+                    <span>🎁</span> Nhận thông điệp 19/11
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 4. CHỮ KÝ TÁC GIẢ Ở DƯỚI CÙNG MÀN HÌNH (7 SẮC CẦU VỒNG) -->
+    <footer class="w-full py-2.5 text-center z-30">
+        <a href="https://t.me/thanhconggdev" target="_blank" rel="noopener noreferrer" 
+           class="rainbow-author inline-block text-[11px] sm:text-xs font-extrabold tracking-wide hover:scale-105 transition-transform">
+            T tele@thanhconggdev
+        </a>
+    </footer>
+
+    <script>
+        // --- 1. THANH THỜI GIAN THỰC GỘP 1 HÀNG DUY NHẤT ---
+        function updateRealtimeBar() {
+            const now = new Date();
+            const hour = now.getHours();
+            const minsNow = now.getMinutes();
+            const secsNow = now.getSeconds();
+            const dayNow = now.getDate();
+            const monthNow = now.getMonth() + 1; // 1 - 12
+
+            // 1.1 Lời chào theo khung giờ thực tế
+            const greetingEl = document.getElementById('greetingText');
+            if (hour >= 5 && hour < 11) {
+                greetingEl.textContent = 'Chào buổi sáng ⛅️';
+            } else if (hour >= 11 && hour < 13) {
+                greetingEl.textContent = 'Chào buổi trưa ☀️';
+            } else if (hour >= 13 && hour < 18) {
+                greetingEl.textContent = 'Chào buổi chiều 🌤️';
+            } else {
+                greetingEl.textContent = 'Chào buổi tối 🌙';
+            }
+
+            // 1.2 Đồng hồ & ngày tháng thực tế (HH:MM:SS - DD/MM)
+            const timeStr = `${String(hour).padStart(2, '0')}:${String(minsNow).padStart(2, '0')}:${String(secsNow).padStart(2, '0')}`;
+            const dateStr = `${String(dayNow).padStart(2, '0')}/${String(monthNow).padStart(2, '0')}`;
+            document.getElementById('liveClockDate').textContent = `${timeStr} - ${dateStr}`;
+
+            // 1.3 Bộ đếm ngược thời gian thực tới 00:00:00 ngày 19/11 gần nhất
+            const countdownEl = document.getElementById('countdownText');
+            if (monthNow === 11 && dayNow === 19) {
+                countdownEl.textContent = 'Đang là 19/11 🎉';
+                return;
+            }
+
+            const currentYear = now.getFullYear();
+            let targetDate = new Date(currentYear, 10, 19, 0, 0, 0, 0); // Tháng 11 là index 10
+            if (now >= targetDate) {
+                targetDate = new Date(currentYear + 1, 10, 19, 0, 0, 0, 0);
+            }
+
+            const diff = targetDate - now;
+            const totalHours = Math.floor(diff / (1000 * 60 * 60));
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const remHours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const remMins = Math.floor((diff / (1000 * 60)) % 60);
+            const remSecs = Math.floor((diff / 1000) % 60);
+
+            // Nếu dưới 48 tiếng thì hiển thị tổng số giờ (VD: Còn 12g 39p 55s tới 19/11), nếu xa hơn thì thêm ngày
+            if (days >= 2) {
+                countdownEl.textContent = `Còn ${days}n ${remHours}g ${String(remMins).padStart(2, '0')}p tới 19/11`;
+            } else {
+                countdownEl.textContent = `Còn ${totalHours}g ${String(remMins).padStart(2, '0')}p ${String(remSecs).padStart(2, '0')}s tới 19/11`;
+            }
+        }
+
+        updateRealtimeBar();
+        setInterval(updateRealtimeBar, 1000);
+
+        // --- 2. HỆ THỐNG PHÁO GIẤY CANVAS TỰ VIẾT (KHÔNG CẦN THƯ VIỆN NGOÀI) ---
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const cCtx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let confettiAnimId = null;
+
+        function resizeConfettiCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeConfettiCanvas);
+        resizeConfettiCanvas();
+
+        function launchConfetti() {
+            const colors = ['#10b981', '#f59e0b', '#3b82f6', '#ec4899', '#8b5cf6', '#ef4444', '#06b6d4'];
+            const count = 130;
+
+            for (let i = 0; i < count; i++) {
+                const fromLeft = i % 2 === 0;
+                confettiParticles.push({
+                    x: fromLeft ? window.innerWidth * 0.25 : window.innerWidth * 0.75,
+                    y: window.innerHeight * 0.55,
+                    vx: (Math.random() - 0.5) * 16 + (fromLeft ? 3 : -3),
+                    vy: -Math.random() * 14 - 5,
+                    size: Math.random() * 8 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    vRot: (Math.random() - 0.5) * 12,
+                    gravity: 0.32,
+                    drag: 0.985,
+                    alpha: 1,
+                    shape: Math.random() > 0.4 ? 'rect' : 'circle'
+                });
+            }
+
+            if (!confettiAnimId) {
+                animateConfetti();
+            }
+        }
+
+        function animateConfetti() {
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+            for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                const p = confettiParticles[i];
+                p.vx *= p.drag;
+                p.vy = p.vy * p.drag + p.gravity;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.vRot;
+
+                if (p.y > confettiCanvas.height * 0.85) {
+                    p.alpha -= 0.025;
+                }
+
+                if (p.alpha <= 0 || p.y > confettiCanvas.height + 30) {
+                    confettiParticles.splice(i, 1);
+                    continue;
+                }
+
+                cCtx.save();
+                cCtx.globalAlpha = Math.max(0, p.alpha);
+                cCtx.translate(p.x, p.y);
+                cCtx.rotate((p.rotation * Math.PI) / 180);
+                cCtx.fillStyle = p.color;
+
+                if (p.shape === 'rect') {
+                    cCtx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size * 0.55);
+                } else {
+                    cCtx.beginPath();
+                    cCtx.arc(0, 0, p.size / 2.2, 0, Math.PI * 2);
+                    cCtx.fill();
+                }
+                cCtx.restore();
+            }
+
+            if (confettiParticles.length > 0) {
+                confettiAnimId = requestAnimationFrame(animateConfetti);
+            } else {
+                confettiAnimId = null;
+            }
+        }
+
+        // --- 3. ÂM THANH WEB AUDIO API & XỬ LÝ 4 ĐÁP ÁN ---
+        let soundEnabled = true;
+        let isWon = false;
+        let wrongCounts = { A: 0, B: 0, D: 0 };
+        let audioCtx = null;
+        let scanInterval = null;
+        let mediaStream = null;
+
+        const teaseData = {
+            A: [
+                { emoji: "😅", text: "Ối nhầm rồi, 20/11 mới là Nhà Giáo nhé! Chọn lại đi nào!" },
+                { emoji: "📅", text: "Lịch nhà bạn chạy nhanh hơn 1 ngày rồi đó, bấm lại mau!" }
+            ],
+            B: [
+                { emoji: "🚽😂", text: "Đúng là ngày này thật nhưng không phải ý chính đâu nha 🚽😂" },
+                { emoji: "🤣", text: "Kiến thức rộng thật đấy, nhưng mai không ai đi tặng hoa cho bồn cầu đâu!" }
+            ],
+            D: [
+                { emoji: "😴😜", text: "Ngày nào bạn chả ngủ nướng, chọn lại đi nha 😴" },
+                { emoji: "🛌", text: "Xinh đẹp thì đúng rồi, nhưng mai là ngày đặc biệt của cánh mày râu cơ!" }
+            ]
+        };
+
+        const beautyComments = {
+            95: "Xinh xắn rạng ngời, khí chất ngút ngàn ai nhìn cũng mê! 🌸✨",
+            96: "Gương mặt tỷ lệ vàng, nụ cười tỏa nắng làm tim ai xao xuyến! ☀️💕",
+            97: "Đẹp không góc chết, thần thái chuẩn minh tinh màn bạc! 👑✨",
+            98: "Xinh xuất sắc, chuẩn gu 19/11! 💖🔥",
+            99: "Tuyệt sắc giai nhân! AI suýt sập nguồn vì độ xinh đẹp này! 😍🌟",
+            100: "100 ĐIỂM TUYỆT ĐỐI! Nữ thần giáng trần, không có điểm nào để chê! 👸💎"
+        };
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'wrongA') {
+                    // Âm thanh boing tụt mood hài hước
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(290, now);
+                    osc.frequency.exponentialRampToValueAtTime(115, now + 0.32);
+                    gain.gain.setValueAtTime(0.16, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.32);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.33);
+
+                } else if (type === 'wrongB') {
+                    // Âm thanh xoáy nước vui nhộn
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(420, now);
+                    osc.frequency.exponentialRampToValueAtTime(140, now + 0.2);
+                    osc.frequency.exponentialRampToValueAtTime(360, now + 0.38);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.38);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.39);
+
+                } else if (type === 'wrongD') {
+                    // Âm thanh trượt nốt tinh nghịch
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(340, now);
+                    osc.frequency.linearRampToValueAtTime(520, now + 0.14);
+                    osc.frequency.linearRampToValueAtTime(220, now + 0.32);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.32);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.33);
+
+                } else if (type === 'win') {
+                    // Nhạc chiến thắng vui tai (C5 - E5 - G5 - C6)
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        const startTime = now + idx * 0.09;
+                        const duration = idx === 3 ? 0.45 : 0.14;
+                        osc.frequency.setValueAtTime(freq, startTime);
+                        gain.gain.setValueAtTime(0.22, startTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(startTime);
+                        osc.stop(startTime + duration);
+                    });
+
+                } else if (type === 'scanTick') {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(920, now);
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.005, now + 0.06);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.07);
+
+                } else if (type === 'scanDone') {
+                    const notes = [783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        const startTime = now + idx * 0.11;
+                        osc.frequency.setValueAtTime(freq, startTime);
+                        gain.gain.setValueAtTime(0.2, startTime);
+                        gain.gain.exponentialRampToValueAtTime(0.008, startTime + 0.35);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(startTime);
+                        osc.stop(startTime + 0.36);
+                    });
+                }
+            } catch (e) {
+                console.warn("Audio error:", e);
+            }
+        }
+
+        function handleAnswer(choice) {
+            if (isWon) {
+                if (choice === 'C') launchConfetti();
+                return;
+            }
+
+            const btn = document.getElementById(`btn-${choice}`);
+            const teaseBox = document.getElementById('teaseBox');
+            const teaseEmoji = document.getElementById('teaseEmoji');
+            const teaseMessage = document.getElementById('teaseMessage');
+
+            if (choice === 'C') {
+                // ĐÁP ÁN ĐÚNG
+                isWon = true;
+                playSound('win');
+                teaseBox.classList.add('hidden');
+
+                btn.classList.remove('bg-white', 'border-slate-200', 'hover:bg-indigo-50/70', 'hover:border-indigo-400');
+                btn.classList.add(
+                    'bg-gradient-to-r', 'from-emerald-500', 'to-teal-500',
+                    'border-amber-300', 'ring-4', 'ring-amber-300/60',
+                    'shadow-xl', 'animate-tada'
+                );
+
+                const badge = btn.querySelector('.badge');
+                badge.classList.remove('bg-sky-100', 'text-sky-700');
+                badge.classList.add('bg-amber-300', 'text-emerald-950');
+
+                const labelText = btn.querySelector('span:nth-child(2)');
+                labelText.classList.remove('text-slate-700');
+                labelText.classList.add('text-white', 'font-extrabold');
+
+                btn.querySelector('.status-icon').classList.remove('opacity-0');
+
+                ['A', 'B', 'D'].forEach(other => {
+                    document.getElementById(`btn-${other}`).classList.add('opacity-50', 'pointer-events-none');
+                });
+
+                launchConfetti();
+                setTimeout(launchConfetti, 420);
+
+                // Mở cửa sổ nổi Quét Face ID AI
+                setTimeout(() => {
+                    openFaceIdModal();
+                }, 700);
+
+            } else {
+                // ĐÁP ÁN SAI (A, B, D)
+                wrongCounts[choice]++;
+                btn.classList.remove('bg-white', 'border-slate-200');
+                btn.classList.add('bg-rose-50', 'border-rose-400');
+                btn.querySelector('.status-icon').classList.remove('opacity-0');
+
+                if (choice === 'A') {
+                    playSound('wrongA');
+                    btn.classList.remove('animate-shake-hard');
+                    void btn.offsetWidth;
+                    btn.classList.add('animate-shake-hard');
+                } else if (choice === 'B') {
+                    playSound('wrongB');
+                    btn.classList.remove('animate-flush-bounce');
+                    void btn.offsetWidth;
+                    btn.classList.add('animate-flush-bounce');
+                } else if (choice === 'D') {
+                    playSound('wrongD');
+                    btn.classList.remove('animate-spin-wobble');
+                    void btn.offsetWidth;
+                    btn.classList.add('animate-spin-wobble');
+
+                    const jumpX = (Math.random() - 0.5) * 28;
+                    const jumpY = (Math.random() - 0.5) * 12;
+                    const rot = (Math.random() - 0.5) * 7;
+                    btn.style.transform = `translate(${jumpX}px, ${jumpY}px) rotate(${rot}deg)`;
+                    setTimeout(() => {
+                        btn.style.transform = '';
+                    }, 550);
+                }
+
+                const messages = teaseData[choice];
+                const msgObj = messages[(wrongCounts[choice] - 1) % messages.length];
+
+                teaseEmoji.textContent = msgObj.emoji;
+                teaseMessage.textContent = msgObj.text;
+
+                teaseBox.classList.remove('hidden', 'animate-pop-in');
+                void teaseBox.offsetWidth;
+                teaseBox.classList.add('animate-pop-in');
+            }
+        }
+
+        // --- 4. CỬA SỔ NỔI QUÉT FACE ID AI ---
+        function openFaceIdModal() {
+            const modal = document.getElementById('faceIdModal');
+            const scanningState = document.getElementById('scanningState');
+            const scanResultState = document.getElementById('scanResultState');
+            const scanProgressBar = document.getElementById('scanProgressBar');
+            const scanSuccessOverlay = document.getElementById('scanSuccessOverlay');
+            const laserBeam = document.getElementById('laserBeam');
+            const scanSubtext = document.getElementById('scanSubtext');
+
+            modal.classList.remove('hidden');
+            scanningState.classList.remove('hidden');
+            scanResultState.classList.add('hidden');
+            scanSuccessOverlay.classList.add('hidden');
+            laserBeam.classList.remove('hidden');
+            scanProgressBar.style.width = '0%';
+            scanSubtext.textContent = 'Hệ thống AI đang phân tích thần thái & độ xinh đẹp...';
+
+            if (scanInterval) clearInterval(scanInterval);
+
+            let progress = 0;
+            const totalDuration = 2500; // Quét trong 2.5 giây
+            const stepTime = 50;
+            const increment = 100 / (totalDuration / stepTime);
+
+            playSound('scanTick');
+
+            scanInterval = setInterval(() => {
+                progress += increment;
+                if (progress >= 45 && progress < 80) {
+                    scanSubtext.textContent = 'Đang đo tỷ lệ khuôn mặt chuẩn hoa hậu...';
+                } else if (progress >= 80 && progress < 100) {
+                    scanSubtext.textContent = 'Cảnh báo: Độ đẹp gái vượt ngưỡng cho phép! Đang chấm điểm...';
+                }
+
+                if (Math.round(progress) % 25 === 0) {
+                    playSound('scanTick');
+                }
+
+                if (progress >= 100) {
+                    progress = 100;
+                    scanProgressBar.style.width = '100%';
+                    clearInterval(scanInterval);
+                    finishFaceIdScan();
+                } else {
+                    scanProgressBar.style.width = `${progress}%`;
+                }
+            }, stepTime);
+        }
+
+        function finishFaceIdScan() {
+            playSound('scanDone');
+
+            // Chấm điểm ngẫu nhiên từ 95 đến 100 điểm
+            const randomScore = Math.floor(Math.random() * 6) + 95;
+            document.getElementById('beautyScoreValue').textContent = randomScore;
+            document.getElementById('badgeBeautyScore').textContent = `${randomScore}/100đ`;
+            document.getElementById('beautyComment').textContent = `"${beautyComments[randomScore]}"`;
+
+            document.getElementById('laserBeam').classList.add('hidden');
+            document.getElementById('scanSuccessOverlay').classList.remove('hidden');
+
+            document.getElementById('scanningState').classList.add('hidden');
+            document.getElementById('scanResultState').classList.remove('hidden');
+
+            launchConfetti();
+        }
+
+        function closeFaceIdModal() {
+            if (scanInterval) clearInterval(scanInterval);
+            stopRealCamera();
+            document.getElementById('faceIdModal').classList.add('hidden');
+
+            const winCard = document.getElementById('winCard');
+            winCard.classList.remove('hidden');
+            winCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function startRealCamera() {
+            const videoEl = document.getElementById('cameraFeed');
+            const aiGraphic = document.getElementById('aiFaceGraphic');
+            const camBtn = document.getElementById('enableCamBtn');
+
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                videoEl.srcObject = mediaStream;
+                videoEl.classList.remove('hidden');
+                aiGraphic.classList.add('opacity-40');
+                camBtn.textContent = '✅ Đã bật camera soi gương';
+            } catch (err) {
+                camBtn.textContent = '⚠️ Không thể mở camera, tiếp tục quét bằng AI mô phỏng!';
+            }
+        }
+
+        function stopRealCamera() {
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+                mediaStream = null;
+            }
+            const videoEl = document.getElementById('cameraFeed');
+            const aiGraphic = document.getElementById('aiFaceGraphic');
+            const camBtn = document.getElementById('enableCamBtn');
+            if (videoEl) videoEl.classList.add('hidden');
+            if (aiGraphic) aiGraphic.classList.remove('opacity-40');
+            if (camBtn) camBtn.textContent = '📷 Bật camera thật để soi gương luôn (tùy chọn)';
+        }
+
+        function resetGame() {
+            isWon = false;
+            wrongCounts = { A: 0, B: 0, D: 0 };
+
+            document.getElementById('teaseBox').classList.add('hidden');
+            document.getElementById('winCard').classList.add('hidden');
+            if (scanInterval) clearInterval(scanInterval);
+            stopRealCamera();
+            document.getElementById('faceIdModal').classList.add('hidden');
+
+            const configs = {
+                A: { badgeBg: 'bg-indigo-100', badgeText: 'text-indigo-700' },
+                B: { badgeBg: 'bg-amber-100', badgeText: 'text-amber-700' },
+                C: { badgeBg: 'bg-sky-100', badgeText: 'text-sky-700' },
+                D: { badgeBg: 'bg-pink-100', badgeText: 'text-pink-700' }
+            };
+
+            ['A', 'B', 'C', 'D'].forEach(key => {
+                const btn = document.getElementById(`btn-${key}`);
+                btn.className = "option-btn group w-full text-left p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-indigo-50/70 border-2 border-slate-200 hover:border-indigo-400 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3.5 active:scale-[0.98]";
+                btn.style.transform = '';
+
+                const badge = btn.querySelector('.badge');
+                badge.className = `badge w-9 h-9 sm:w-10 sm:h-10 rounded-xl ${configs[key].badgeBg} ${configs[key].badgeText} font-black text-base sm:text-lg flex items-center justify-center shrink-0 transition-colors`;
+
+                const labelText = btn.querySelector('span:nth-child(2)');
+                labelText.className = "font-bold text-slate-700 text-sm sm:text-lg flex-1";
+
+                btn.querySelector('.status-icon').classList.add('opacity-0');
+            });
+        }
+    </script>
+</body>
+</html>
