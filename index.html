@@ -404,7 +404,7 @@
       flex-shrink: 0;
     }
 
-    #lk-video, #lk-captured-img, #lk-fallback-canvas {
+    #lk-video, #lk-captured-img, #lk-fallback-canvas, #lk-recorded-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -538,6 +538,48 @@
       text-overflow: ellipsis;
     }
 
+    /* Hiệu ứng Đang rửa ảnh & Thanh quay video */
+    .washing-overlay {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #f5b935;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      z-index: 18;
+    }
+
+    .video-timer-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(239, 68, 68, 0.9);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 5px 12px;
+      border-radius: 999px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      z-index: 18;
+      animation: pulseTimer 1s infinite;
+    }
+
+    @keyframes pulseTimer {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
     .locket-controls-capture {
       display: flex;
       align-items: center;
@@ -556,6 +598,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      transition: transform 0.1s ease;
+    }
+
+    .shutter-outer:active {
+      transform: scale(0.93);
     }
 
     .shutter-inner { width: 100%; height: 100%; border-radius: 50%; background: #ffffff; }
@@ -643,17 +691,17 @@
     .nav-pill-bar span { font-size: 16px; opacity: 0.7; }
     .nav-pill-bar span.active { opacity: 1; background: rgba(255, 255, 255, 0.2); padding: 6px 12px; border-radius: 999px; }
 
-    /* Bảng trượt Chú thích */
-    .caption-sheet {
+    /* Bảng trượt Photobooth & Chú thích */
+    .sheet-panel {
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      height: 76%;
+      height: 80%;
       background: #231915;
       border-top-left-radius: 30px;
       border-top-right-radius: 30px;
-      padding: 10px 16px 20px;
+      padding: 12px 16px 20px;
       display: flex;
       flex-direction: column;
       transform: translateY(105%);
@@ -661,11 +709,73 @@
       z-index: 30;
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6);
     }
-    .caption-sheet.open { transform: translateY(0); }
+    .sheet-panel.open { transform: translateY(0); }
     .sheet-handle { width: 40px; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.3); margin: 0 auto 10px; cursor: pointer; }
-    .sheet-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .sheet-title { font-size: 16px; font-weight: 800; text-align: center; flex: 1; }
+    .sheet-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .sheet-title { font-size: 16px; font-weight: 800; text-align: center; flex: 1; color: #fff; }
 
+    .photobooth-content {
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 20px;
+    }
+
+    .booth-section-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f5b935;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .booth-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .booth-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .booth-item.active {
+      border-color: #f5b935;
+      background: rgba(245, 185, 53, 0.15);
+    }
+
+    .booth-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b82f6, #ec4899);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .booth-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Bảng Caption */
     .custom-cap-row { display: flex; gap: 8px; margin-bottom: 12px; }
     .custom-cap-input {
       flex: 1;
@@ -690,7 +800,7 @@
       cursor: pointer;
     }
 
-    .caption-pills-list { overflow-y: auto; display: flex; flex-wrap: wrap; gap: 9px; padding-bottom: 12px; }
+    .caption-pills-list { overflow-y: auto; flex: 1; display: flex; flex-wrap: wrap; gap: 9px; padding-bottom: 12px; }
     .cap-pill-item {
       border: none;
       border-radius: 999px;
@@ -703,10 +813,6 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      transition: transform 0.15s ease;
-    }
-    .cap-pill-item:active {
-      transform: scale(0.96);
     }
 
     /* ==================== MODAL NHẮC KHÉO QUÀ 19/11 ==================== */
@@ -823,7 +929,7 @@
       </div>
 
       <button class="reopen-locket-btn" id="reopen-locket-btn" onclick="openLocketModal()">
-        📸 Mở lại Locket AI Chấm Điểm Đẹp Gái
+        📸 Mở lại Locket AI Photobooth
       </button>
     </section>
   </main>
@@ -854,8 +960,9 @@
         <video id="lk-video" class="mirror" autoplay playsinline muted></video>
         <canvas id="lk-fallback-canvas" width="600" height="600" style="display:none;"></canvas>
         <img id="lk-captured-img" alt="Ảnh đã chụp" style="display:none;" />
+        <video id="lk-recorded-video" autoplay loop playsinline muted style="display:none;"></video>
 
-        <button class="vf-overlay-btn vf-tl" id="btn-mic" onclick="toggleHint('🎤 Mic đã sẵn sàng!')">🎤</button>
+        <button class="vf-overlay-btn vf-tl" id="btn-booth" onclick="openBoothSheet()" title="Chọn Photobooth">👑</button>
         <button class="vf-overlay-btn vf-tr" id="btn-zoom" onclick="toggleZoom()">1x</button>
         <button class="vf-overlay-btn vf-bl" id="btn-flash" onclick="toggleFlash()">⚡</button>
         <button class="vf-overlay-btn vf-br" id="btn-beauty" onclick="toggleBeauty()">✨</button>
@@ -868,19 +975,22 @@
           <div class="ai-score-sub" id="ai-score-comment">Đẹp gái dễ thương xinh xỉu!</div>
         </div>
 
-        <div class="preview-caption-pill" id="preview-caption-pill" onclick="toggleCaptionSheet(true)">
+        <div class="washing-overlay" id="washing-overlay">✨ Đang rửa ảnh...</div>
+        <div class="video-timer-badge" id="video-timer-badge">🔴 <span id="timer-sec">10</span>s (Quay video kèm Mic)</div>
+
+        <div class="preview-caption-pill" id="preview-caption-pill" onclick="openCaptionSheet()">
           <span id="active-cap-emoji">💖</span>
           <span id="active-cap-text">Đẹp gái dễ thương xinh xỉu!</span>
         </div>
       </div>
 
-      <!-- Chụp -->
+      <!-- Chụp / Quay video (Nhấn giữ để quay 10s có mic) -->
       <div class="locket-controls-capture" id="controls-capture">
         <label class="side-action-btn" title="Chọn ảnh từ thư viện">
           🖼️
           <input type="file" accept="image/*" hidden onchange="handleUploadPhoto(event)" />
         </label>
-        <button class="shutter-outer" onclick="capturePhoto()" title="Chụp ảnh"><div class="shutter-inner"></div></button>
+        <button class="shutter-outer" id="shutter-btn" title="Chạm để chụp ảnh, Nhấn giữ để quay video 10s"><div class="shutter-inner"></div></button>
         <button class="side-action-btn" onclick="switchCamera()" title="Đổi camera">🔄</button>
       </div>
 
@@ -888,11 +998,11 @@
       <div class="locket-controls-preview" id="controls-preview">
         <div class="preview-actions-row">
           <button class="wish-banner-btn" onclick="openWishModal()">🎁 Nhắc khéo quà 19/11</button>
-          <button class="save-banner-btn" onclick="downloadLocketImage()">⬇️ Lưu ảnh</button>
+          <button class="save-banner-btn" onclick="downloadLocketResult()">⬇️ Lưu về máy</button>
         </div>
         <div style="display:flex; justify-content:space-between; gap:8px;">
           <button class="lk-circle-btn" style="width:40px;height:40px;font-size:18px;border-radius:14px;" onclick="retakePhoto()" title="Chụp lại">✕</button>
-          <button class="lk-circle-btn" style="flex:1;height:40px;font-size:13.5px;font-weight:800;border-radius:14px;" onclick="toggleCaptionSheet(true)">Aa+ Chọn caption hot TikTok</button>
+          <button class="lk-circle-btn" style="flex:1;height:40px;font-size:13.5px;font-weight:800;border-radius:14px;" onclick="openCaptionSheet()">Aa+ Chọn caption hot TikTok</button>
         </div>
       </div>
 
@@ -905,13 +1015,24 @@
         </div>
       </div>
 
-      <!-- Bảng trượt Chú thích -->
-      <div class="caption-sheet" id="caption-sheet">
-        <div class="sheet-handle" onclick="toggleCaptionSheet(false)"></div>
+      <!-- Bảng trượt Photobooth -->
+      <div class="sheet-panel" id="booth-sheet">
+        <div class="sheet-handle" onclick="closeSheets()"></div>
+        <div class="sheet-header">
+          <span style="width:32px;"></span>
+          <div class="sheet-title">Bộ Sưu Tập Photobooth 📸</div>
+          <button class="lk-circle-btn" style="width:30px;height:30px;font-size:13px;" onclick="closeSheets()">✕</button>
+        </div>
+        <div class="photobooth-content" id="booth-list-container"></div>
+      </div>
+
+      <!-- Bảng trượt Chú thích Caption -->
+      <div class="sheet-panel" id="caption-sheet">
+        <div class="sheet-handle" onclick="closeSheets()"></div>
         <div class="sheet-header">
           <span style="width:32px;"></span>
           <div class="sheet-title">Caption Hot TikTok 🔥</div>
-          <button class="lk-circle-btn" style="width:30px;height:30px;font-size:13px;" onclick="toggleCaptionSheet(false)">✕</button>
+          <button class="lk-circle-btn" style="width:30px;height:30px;font-size:13px;" onclick="closeSheets()">✕</button>
         </div>
         <div class="custom-cap-row">
           <input type="text" class="custom-cap-input" id="custom-cap-input" placeholder="Tự nhập chú thích của bạn..." maxlength="48" />
@@ -1103,7 +1224,42 @@
       render();
     }
 
-    /* Kho Caption Hot TikTok & Locket */
+    /* Dữ liệu Photobooth & Caption */
+    const PHOTOBOOTH_CATEGORIES = [
+      {
+        title: '📸 Photobooth 4 Ảnh',
+        items: [
+          { id: 'locket_standard', name: 'Locket', icon: '💛', bg: ['#3b301d', '#f5b935'] },
+          { id: 'locket_gold', name: 'Locket Gold', icon: '✨', bg: ['#433722', '#f97316'] },
+          { id: 'locket_blue', name: 'Locket Blue', icon: '🦋', bg: ['#1e3a8a', '#3b82f6'] },
+          { id: 'kpop_booth', name: 'K-Pop', icon: '💖', bg: ['#831843', '#ec4899'] }
+        ]
+      },
+      {
+        title: '📸 Photobooth 3 Ảnh',
+        items: [
+          { id: 'photo_cute', name: 'Photo Cute', icon: '🧸', bg: ['#9d174d', '#f43f5e'] }
+        ]
+      },
+      {
+        title: '📸 Photobooth 2 Ảnh',
+        items: [
+          { id: 'ngay_van_hoa', name: 'Ngày Văn Hoá', icon: '🇻🇳', bg: ['#991b1b', '#ef4444'] },
+          { id: 'mua_dong', name: 'Mùa Đông', icon: '❄️', bg: ['#0f766e', '#14b8a6'] },
+          { id: 'noel', name: 'Noel', icon: '🎄', bg: ['#14532d', '#22c55e'] },
+          { id: 'sinh_nhat', name: 'Sinh Nhật', icon: '🎂', bg: ['#701a75', '#d946ef'] }
+        ]
+      },
+      {
+        title: '📸 Photobooth 1 Ảnh',
+        items: [
+          { id: 'spotify', name: 'Spotify', icon: '🎧', bg: ['#065f46', '#10b981'] },
+          { id: 'kitty', name: 'Hello Kitty', icon: '🎀', bg: ['#be185d', '#f472b6'] },
+          { id: 'thien_than', name: 'Thiên Thần', icon: '👼', bg: ['#1e40af', '#60a5fa'] }
+        ]
+      }
+    ];
+
     const CAPTION_PRESETS = [
       { emoji: '💖', text: 'Đẹp gái dễ thương xinh xỉu!', bg: ['#ec4899', '#f43f5e'] },
       { emoji: '✨', text: 'Flop quá thì ghi tên anh vào.', bg: ['#3b82f6', '#2563eb'] },
@@ -1114,11 +1270,10 @@
       { emoji: '💅', text: 'Độc thân vui tính nhưng có người nuôi thì càng vui.', bg: ['#8b5cf6', '#6d28d9'] },
       { emoji: '🍓', text: 'Nhìn em có giống người đang đợi ting ting không?', bg: ['#10b981', '#059669'] },
       { emoji: '🔥', text: 'Mãi mận, mãi keo, mãi đỉnh nóc kịch trần!', bg: ['#f97316', '#ea580c'] },
-      { emoji: '🥺', text: 'Anh ơi mai 19/11 rồi, tính sao đây ta?', bg: ['#ec4899', '#a855f7'] },
-      { emoji: '🌸', text: 'Tính em hay quên, nhưng quà cáp thì nhớ dai lắm.', bg: ['#db2777', '#9d174d'] },
-      { emoji: '👑', text: 'Xinh đẹp là một loại tài năng, và em thì đa tài.', bg: ['#eab308', '#ca8a04'] }
+      { emoji: '🥺', text: 'Anh ơi mai 19/11 rồi, tính sao đây ta?', bg: ['#ec4899', '#a855f7'] }
     ];
 
+    let selectedBooth = PHOTOBOOTH_CATEGORIES[0].items[0];
     let selectedCaption = CAPTION_PRESETS[0];
     let mediaStream = null;
     let facingMode = 'user';
@@ -1127,8 +1282,40 @@
     let isFlashOn = false;
     let isBeautyOn = true;
     let capturedDataUrl = null;
+    let recordedVideoUrl = null;
+    let isVideoMode = false;
     let currentAiScore = 99;
     let currentAiComment = 'Đẹp gái dễ thương vô địch!';
+
+    /* Khởi tạo danh sách Booth & Caption */
+    function renderBoothList() {
+      const container = document.getElementById('booth-list-container');
+      container.innerHTML = '';
+      PHOTOBOOTH_CATEGORIES.forEach(cat => {
+        const secDiv = document.createElement('div');
+        secDiv.innerHTML = `<div class="booth-section-title">${cat.title}</div>`;
+        const grid = document.createElement('div');
+        grid.className = 'booth-grid';
+
+        cat.items.forEach(item => {
+          const btn = document.createElement('div');
+          btn.className = `booth-item ${selectedBooth.id === item.id ? 'active' : ''}`;
+          btn.innerHTML = `
+            <div class="booth-thumb" style="background: linear-gradient(135deg, ${item.bg[0]}, ${item.bg[1]})">${item.icon}</div>
+            <div class="booth-name">${item.name}</div>
+          `;
+          btn.onclick = () => {
+            selectedBooth = item;
+            renderBoothList();
+            closeSheets();
+            toggleHint(`👑 Đã chọn: ${item.name}`);
+          };
+          grid.appendChild(btn);
+        });
+        secDiv.appendChild(grid);
+        container.appendChild(secDiv);
+      });
+    }
 
     function renderCaptionPills() {
       const container = document.getElementById('caption-pills-list');
@@ -1138,7 +1325,7 @@
         btn.className = 'cap-pill-item';
         btn.style.background = `linear-gradient(90deg, ${item.bg[0]}, ${item.bg[1]})`;
         btn.innerHTML = `<span>${item.emoji}</span><span>${item.text}</span>`;
-        btn.onclick = () => { selectCaption(item); toggleCaptionSheet(false); };
+        btn.onclick = () => { selectCaption(item); closeSheets(); };
         container.appendChild(btn);
       });
     }
@@ -1155,11 +1342,24 @@
       const val = document.getElementById('custom-cap-input').value.trim();
       if (!val) return;
       selectCaption({ emoji: '✨', text: val, bg: ['#3b82f6', '#ec4899'] });
-      toggleCaptionSheet(false);
+      closeSheets();
     }
 
-    function toggleCaptionSheet(open) {
-      document.getElementById('caption-sheet').classList.toggle('open', open);
+    function openBoothSheet() {
+      renderBoothList();
+      document.getElementById('booth-sheet').classList.add('open');
+      document.getElementById('caption-sheet').classList.remove('open');
+    }
+
+    function openCaptionSheet() {
+      renderCaptionPills();
+      document.getElementById('caption-sheet').classList.add('open');
+      document.getElementById('booth-sheet').classList.remove('open');
+    }
+
+    function closeSheets() {
+      document.getElementById('booth-sheet').classList.remove('open');
+      document.getElementById('caption-sheet').classList.remove('open');
     }
 
     async function startCamera() {
@@ -1169,7 +1369,7 @@
       try {
         mediaStream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode, width: { ideal: 1080 }, height: { ideal: 1080 } },
-          audio: false
+          audio: true
         });
         video.srcObject = mediaStream;
         video.style.display = 'block';
@@ -1197,7 +1397,6 @@
     }
 
     function openLocketModal() {
-      renderCaptionPills();
       selectCaption(selectedCaption);
       document.getElementById('locket-overlay').classList.add('active');
       retakePhoto();
@@ -1205,7 +1404,7 @@
 
     function closeLocketModal() {
       document.getElementById('locket-overlay').classList.remove('active');
-      toggleCaptionSheet(false);
+      closeSheets();
       if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); mediaStream = null; }
     }
 
@@ -1239,6 +1438,37 @@
       setTimeout(() => { title.textContent = old; }, 1600);
     }
 
+    /* Logic Chụp ảnh (Click) & Quay video 10s kèm Mic (Nhấn giữ) */
+    let pressTimer = null;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let isRecording = false;
+    let countdownInterval = null;
+
+    const shutterBtn = document.getElementById('shutter-btn');
+
+    shutterBtn.addEventListener('mousedown', startPressHold);
+    shutterBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startPressHold(); });
+
+    shutterBtn.addEventListener('mouseup', cancelOrClick);
+    shutterBtn.addEventListener('touchend', (e) => { e.preventDefault(); cancelOrClick(); });
+
+    function startPressHold() {
+      if (isRecording) return;
+      pressTimer = setTimeout(() => {
+        startRecordingVideo();
+      }, 500); // Giữ trên 0.5s sẽ kích hoạt quay video
+    }
+
+    function cancelOrClick() {
+      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      if (isRecording) {
+        stopRecordingVideo();
+      } else {
+        capturePhoto(); // Thả tay sớm -> Chụp ảnh tĩnh
+      }
+    }
+
     function capturePhoto() {
       playTone('shutter');
       const tempCanvas = document.createElement('canvas');
@@ -1258,7 +1488,57 @@
       }
 
       capturedDataUrl = tempCanvas.toDataURL('image/png');
-      enterPreviewAndRunAI();
+      isVideoMode = false;
+      showWashingAndAI();
+    }
+
+    /* Quay video 10s kèm Mic */
+    function startRecordingVideo() {
+      if (!mediaStream) return;
+      isRecording = true;
+      recordedChunks = [];
+      playTone('shutter');
+
+      try {
+        mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm;codecs=vp9,opus' });
+      } catch (e) {
+        try { mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'video/mp4' }); } catch (err) { mediaRecorder = new MediaRecorder(mediaStream); }
+      }
+
+      mediaRecorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        recordedVideoUrl = URL.createObjectURL(blob);
+        isVideoMode = true;
+        showWashingAndAIForVideo();
+      };
+
+      mediaRecorder.start();
+      
+      let secLeft = 10;
+      const timerBadge = document.getElementById('video-timer-badge');
+      document.getElementById('timer-sec').textContent = secLeft;
+      timerBadge.style.display = 'flex';
+
+      countdownInterval = setInterval(() => {
+        secLeft--;
+        document.getElementById('timer-sec').textContent = secLeft;
+        if (secLeft <= 0) {
+          stopRecordingVideo();
+        }
+      }, 1000);
+    }
+
+    function stopRecordingVideo() {
+      if (!isRecording) return;
+      isRecording = false;
+      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+      document.getElementById('video-timer-badge').style.display = 'none';
+
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
     }
 
     function handleUploadPhoto(event) {
@@ -1274,11 +1554,32 @@
           const side = Math.min(img.width, img.height);
           ctx.drawImage(img, (img.width - side)/2, (img.height - side)/2, side, side, 0, 0, 1080, 1080);
           capturedDataUrl = tempCanvas.toDataURL('image/png');
-          enterPreviewAndRunAI();
+          isVideoMode = false;
+          showWashingAndAI();
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
+    }
+
+    function showWashingAndAI() {
+      const washing = document.getElementById('washing-overlay');
+      washing.style.display = 'flex';
+      setTimeout(() => {
+        washing.style.display = 'none';
+        enterPreviewAndRunAI();
+      }, 1000);
+    }
+
+    function showWashingAndAIForVideo() {
+      const washing = document.getElementById('washing-overlay');
+      washing.textContent = '✨ Đang xử lý video & mic...';
+      washing.style.display = 'flex';
+      setTimeout(() => {
+        washing.style.display = 'none';
+        washing.textContent = '✨ Đang rửa ảnh...';
+        enterPreviewAndRunAIForVideo();
+      }, 1000);
     }
 
     function enterPreviewAndRunAI() {
@@ -1286,8 +1587,25 @@
       document.getElementById('lk-captured-img').style.display = 'block';
       document.getElementById('lk-video').style.display = 'none';
       document.getElementById('lk-fallback-canvas').style.display = 'none';
+      document.getElementById('lk-recorded-video').style.display = 'none';
 
-      ['btn-mic', 'btn-zoom', 'btn-flash', 'btn-beauty'].forEach(id => document.getElementById(id).style.display = 'none');
+      preparePreviewUI();
+    }
+
+    function enterPreviewAndRunAIForVideo() {
+      const recVid = document.getElementById('lk-recorded-video');
+      recVid.src = recordedVideoUrl;
+      recVid.style.display = 'block';
+      recVid.play();
+      document.getElementById('lk-video').style.display = 'none';
+      document.getElementById('lk-captured-img').style.display = 'none';
+      document.getElementById('lk-fallback-canvas').style.display = 'none';
+
+      preparePreviewUI();
+    }
+
+    function preparePreviewUI() {
+      ['btn-booth', 'btn-zoom', 'btn-flash', 'btn-beauty'].forEach(id => document.getElementById(id).style.display = 'none');
       document.getElementById('controls-capture').style.display = 'none';
       document.getElementById('locket-bottom-nav').style.display = 'none';
       document.getElementById('controls-preview').style.display = 'flex';
@@ -1309,7 +1627,7 @@
         'Cưng xỉu, đáng yêu hết phần thiên hạ!'
       ];
 
-      currentAiScore = Math.floor(Math.random() * 4) + 97; // 97-100đ
+      currentAiScore = Math.floor(Math.random() * 4) + 97;
       currentAiComment = comments[Math.floor(Math.random() * comments.length)];
 
       setTimeout(() => {
@@ -1324,13 +1642,16 @@
 
     function retakePhoto() {
       capturedDataUrl = null;
+      recordedVideoUrl = null;
+      isVideoMode = false;
       document.getElementById('lk-captured-img').style.display = 'none';
+      document.getElementById('lk-recorded-video').style.display = 'none';
       document.getElementById('ai-scan-beam').style.display = 'none';
       document.getElementById('ai-scanning-label').style.display = 'none';
       document.getElementById('ai-score-badge').style.display = 'none';
       document.getElementById('preview-caption-pill').style.display = 'none';
 
-      ['btn-mic', 'btn-zoom', 'btn-flash', 'btn-beauty'].forEach(id => document.getElementById(id).style.display = 'flex');
+      ['btn-booth', 'btn-zoom', 'btn-flash', 'btn-beauty'].forEach(id => document.getElementById(id).style.display = 'flex');
       document.getElementById('controls-capture').style.display = 'flex';
       document.getElementById('locket-bottom-nav').style.display = 'flex';
       document.getElementById('controls-preview').style.display = 'none';
@@ -1338,7 +1659,16 @@
       startCamera();
     }
 
-    function downloadLocketImage() {
+    function downloadLocketResult() {
+      if (isVideoMode && recordedVideoUrl) {
+        const link = document.createElement('a');
+        link.download = `Locket_Video_19-11_${currentAiScore}d.webm`;
+        link.href = recordedVideoUrl;
+        document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        toggleHint('✅ Đã tải video kèm mic thành công!');
+        return;
+      }
+
       if (!capturedDataUrl) { capturePhoto(); return; }
       const img = new Image();
       img.onload = function() {
@@ -1393,10 +1723,10 @@
         ctx.fillText(fullCap, 540, pillY + pillH/2 + 2, pillW - 56);
 
         const link = document.createElement('a');
-        link.download = `Locket_19-11_DepGai_${currentAiScore}d.png`;
+        link.download = `Locket_${selectedBooth.id}_${currentAiScore}d.png`;
         link.href = canvas.toDataURL('image/png');
         document.body.appendChild(link); link.click(); document.body.removeChild(link);
-        toggleHint('✅ Đã lưu ảnh thành công!');
+        toggleHint('✅ Đã lưu ảnh Photobooth thành công!');
       };
       img.src = capturedDataUrl;
     }
